@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text ="육류"/>
+    <CheckBox
+        android:onClick="onCheckboxClicked"
+        android:id="@+id/checkCow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:text="쇠고기" />
+
+    <CheckBox
+        android:onClick="onCheckboxClicked"
+        android:id="@+id/checkPig"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="돼지고기" />
+
+    <CheckBox
+        android:onClick="onCheckboxClicked"
+        android:id="@+id/checkChicken"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="닭고기" />
+
+    <CheckBox
+        android:onClick="onCheckboxClicked"
+        android:id="@+id/checkYang"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="양고기" />
+
+    <CheckBox
+        android:onClick="onCheckboxClicked"
+        android:id="@+id/checkOri"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="오리고기" />
+
+    <CheckBox
+        android:onClick="onCheckboxClicked"
+        android:id="@+id/checkGoat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="염소고기" />
+
+    <Button
+
+        android:id="@+id/meatStorageButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="확인" />
+
+
+
+
+
+</LinearLayout>

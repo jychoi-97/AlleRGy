@@ -32,6 +32,8 @@ public class MeatStorageActivity extends AppCompatActivity {
             public void onClick(View v) {
                 setStringArrayPref("usersAllergyList", meatArrayList);
 
+                Toast.makeText(getApplicationContext(), meatArrayList.get(0) + meatArrayList.get(1), Toast.LENGTH_LONG).show();
+
 
 
 
