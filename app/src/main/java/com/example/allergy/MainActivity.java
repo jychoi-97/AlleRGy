@@ -1,5 +1,6 @@
 package com.example.allergy;
 
+import android.app.ActionBar;
 import android.support.annotation.NonNull;
 import android.support.annotation.UiThread;
 import android.support.design.widget.FloatingActionButton;
@@ -10,20 +11,30 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.naver.maps.geometry.LatLng;
+import com.naver.maps.map.CameraPosition;
 import com.naver.maps.map.MapFragment;
 import com.naver.maps.map.NaverMap;
+import com.naver.maps.map.NaverMapOptions;
 import com.naver.maps.map.NaverMapSdk;
 import com.naver.maps.map.OnMapReadyCallback;
+import com.naver.maps.map.overlay.LocationOverlay;
+import com.naver.maps.map.overlay.Marker;
+import com.naver.maps.map.overlay.OverlayImage;
 import com.naver.maps.map.util.FusedLocationSource;
+import com.naver.maps.map.util.MarkerIcons;
+
+import java.util.Map;
 
 public class MainActivity extends FragmentActivity implements OnMapReadyCallback, View.OnClickListener {
 
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1000;
     private FusedLocationSource locationSource;
 
+    LatLng coord = new LatLng(37.570694 , 126.968870);
     //플러팅 액션바1 (아래 3줄)
     private Animation fab_open, fab_close;
     private Boolean isFabOpen = false;
@@ -35,14 +46,25 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         NaverMapSdk.getInstance(this).setClient(new NaverMapSdk.NaverCloudPlatformClient("amqmjryw28"));
         setContentView(R.layout.activity_main);
 
+        ActionBar actionBar = getActionBar();
+            if (actionBar != null) {
+                actionBar.setDisplayHomeAsUpEnabled(true);
+                actionBar.setDisplayShowHomeEnabled(true);
+           }
+
+
+
         FragmentManager fm = getSupportFragmentManager();
         MapFragment mapFragment = (MapFragment) fm.findFragmentById(R.id.map);
         if (mapFragment == null) {
 
-            mapFragment = mapFragment.newInstance();
+            mapFragment = mapFragment.newInstance(new NaverMapOptions().camera(new CameraPosition(
+                    NaverMap.DEFAULT_CAMERA_POSITION.target, NaverMap.DEFAULT_CAMERA_POSITION.zoom,20,45)));
             fm.beginTransaction().add(R.id.map, mapFragment).commit();
         }
         mapFragment.getMapAsync(this);
+        //locationSource = new FusedLocationSource(this, LOCATION_PERMISSION_REQUEST_CODE);
+
         locationSource = new FusedLocationSource(this, LOCATION_PERMISSION_REQUEST_CODE);
 
         //플러팅 액션바 여기부터2
@@ -60,13 +82,26 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 
     }
 
-    @UiThread
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        if(item.getItemId()== android.R.id.home){
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+//    @UiThread
     @Override
     public void onMapReady(@NonNull NaverMap naverMap) {
-        naverMap.setLocationSource(locationSource);
+        //naverMap.setLocationSource(locationSource);
 
+        Marker marker = new Marker();
+        marker.setPosition(new LatLng(37.570694 , 126.968870));
+        marker.setMap(naverMap);
+        marker.setIcon(MarkerIcons.BLACK);
     }
-    LatLng coord = new LatLng(37.5670135, 126.9783740);
+
 
     public void onRequestPermissionResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (locationSource.onRequestPermissionsResult(requestCode, permissions, grantResults)) {
