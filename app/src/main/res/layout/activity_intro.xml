@@ -4,21 +4,10 @@
     android:layout_height="match_parent">
 
     <ImageView
+        android:id = "@+id/iv1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/intro0"
-        android:scaleType="fitXY" />
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@drawable/intro1"
-        android:scaleType="fitXY" />
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@drawable/intro2"
+        android:src="@raw/intro"
         android:scaleType="fitXY" />
 
 </android.support.constraint.ConstraintLayout>

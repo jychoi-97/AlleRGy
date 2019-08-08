@@ -1,6 +1,7 @@
 package com.example.allergy;
 
 import android.app.ActionBar;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.UiThread;
 import android.support.design.widget.FloatingActionButton;
@@ -117,15 +118,20 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         switch (id) {
             case R.id.fab:
                 anim();
-                Toast.makeText(this, "Floating Action Button", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Floating Action Button", Toast.LENGTH_SHORT).show();  //나중에 지우던가 문구를 바꾸던가 해야함
                 break;
             case R.id.fab1:
                 anim();
-                Toast.makeText(this, "Button1", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Button1", Toast.LENGTH_SHORT).show();  //나중에 지우던가 문구를 바꾸던가 해야함
+//아래 두 줄은 저장된 거 확인하는 xml만들어지면 수정하기
+//                Intent intent = new Intent(getApplicationContext(), MeatStorageActivity.class);
+//                startActivity(intent);
                 break;
             case R.id.fab2:
                 anim();
-                Toast.makeText(this, "Button2", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "MeatStorageActivity", Toast.LENGTH_SHORT).show();  //나중에 지우던가 문구를 바꾸던가 해야함
+                Intent intent = new Intent(getApplicationContext(), MeatStorageActivity.class);
+                startActivity(intent);
                 break;
         }
     }
