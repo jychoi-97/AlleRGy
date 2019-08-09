@@ -1,33 +1,54 @@
 package com.example.allergy;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.TextView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
+import java.util.ArrayList;
+
 public class PopupActivity extends Activity {
 
+    SharedPreferences appData;
     TextView txtText;
+    String json;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+
+
+
         //타이틀바 없애기
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.popup_activity);
 
+        appData = getSharedPreferences("appData", MODE_PRIVATE);
+
         //UI 객체생성
         txtText = (TextView)findViewById(R.id.txtText);
+
 
         //데이터 가져오기
         Intent intent = getIntent();
         String data = intent.getStringExtra("data");
-        txtText.setText(data);
+
     }
+
+
 
     //확인 버튼 클릭
     public void mOnClose(View v){

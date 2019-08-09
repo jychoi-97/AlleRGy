@@ -189,6 +189,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                 break;
             case R.id.fab2:
                 anim();
+
                 Toast.makeText(this, "MeatStorageActivity", Toast.LENGTH_SHORT).show();  //나중에 지우던가 문구를 바꾸던가 해야함
                 Intent intent2 = new Intent(getApplicationContext(), MeatStorageActivity.class);
                 startActivity(intent2);

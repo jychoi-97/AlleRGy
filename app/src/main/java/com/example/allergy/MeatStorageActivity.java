@@ -3,10 +3,12 @@ package com.example.allergy;
 
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.Toast;
@@ -17,7 +19,7 @@ import java.util.ArrayList;
 
 public class MeatStorageActivity extends AppCompatActivity {
 
-    SharedPreferences appData;
+
 
     boolean saveLoginData[];
 
@@ -50,12 +52,28 @@ public class MeatStorageActivity extends AppCompatActivity {
     CheckBox milk4;
 
     ArrayList<String> meatArrayList = new ArrayList<>();
+    public void setStringArrayList(String key, ArrayList<String> valueList){
+        SharedPreferences prefs = getSharedPreferences("users_allery_list", MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        JSONArray jsonArray = new JSONArray();
+        for(int i=0; i<valueList.size(); i++){
+            jsonArray.put(valueList.get(i));
+        }
+        if(!valueList.isEmpty()){
+            editor.putString(key, jsonArray.toString());
+        } else {
+            editor.putString(key, null);
+        }
+        editor.commit();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_meat_storage);
-        appData = getSharedPreferences("appData", MODE_PRIVATE);
+
+
+
 
         meatStorageButton = (Button) findViewById(R.id.allergyStorageButton);
         meat1 = (CheckBox) findViewById(R.id.meat1);
@@ -101,7 +119,7 @@ public class MeatStorageActivity extends AppCompatActivity {
         meatStorageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SharedPreferences.Editor editor = appData.edit();
+                
                 if(meat1.isChecked())
                     meatArrayList.add("쇠고기");
                 if(meat2.isChecked())
@@ -151,16 +169,8 @@ public class MeatStorageActivity extends AppCompatActivity {
                 if(milk4.isChecked())
                     meatArrayList.add("버터");
 
-                JSONArray a = new JSONArray();
-                for (int i = 0; i < meatArrayList.size(); i++) {
-                    a.put(meatArrayList.get(i));
-                }
-                if (!meatArrayList.isEmpty()) {
-                    editor.putString("usersAllergyList", a.toString());
-                } else {
-                    editor.putString("usersAllergyList", null);
-                }
-                editor.commit();
+                setStringArrayPref("usersAllergyList", meatArrayList);
+
 
 
 //                setStringArrayPref("usersAllergyList", meatArrayList);
@@ -177,6 +187,10 @@ public class MeatStorageActivity extends AppCompatActivity {
 
 
     }
+
+
+
+
 //    public void onCheckboxClicked(View view) {
 //
 //        boolean checked = ((CheckBox) view).isChecked();
@@ -282,18 +296,18 @@ public class MeatStorageActivity extends AppCompatActivity {
 //
 //        }
 //    }
-//    public void setStringArrayPref(String key, ArrayList<String> values) {
-//        SharedPreferences prefs = getSharedPreferences("users_allery_list", MODE_PRIVATE);
-//        SharedPreferences.Editor editor = prefs.edit();
-//        JSONArray a = new JSONArray();
-//        for (int i = 0; i < values.size(); i++) {
-//            a.put(values.get(i));
-//        }
-//        if (!values.isEmpty()) {
-//            editor.putString(key, a.toString());
-//        } else {
-//            editor.putString(key, null);
-//        }
-//        editor.commit();
-//    }
+    public void setStringArrayPref(String key, ArrayList<String> values) {
+        SharedPreferences prefs = getSharedPreferences("users_allery_list", MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        JSONArray a = new JSONArray();
+        for (int i = 0; i < values.size(); i++) {
+            a.put(values.get(i));
+        }
+        if (!values.isEmpty()) {
+            editor.putString(key, a.toString());
+        } else {
+            editor.putString(key, null);
+        }
+        editor.commit();
+    }
 }
