@@ -47,6 +47,10 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         NaverMapSdk.getInstance(this).setClient(new NaverMapSdk.NaverCloudPlatformClient("amqmjryw28"));
         setContentView(R.layout.activity_main);
 
+
+
+
+
         ActionBar actionBar = getActionBar();
             if (actionBar != null) {
                 actionBar.setDisplayHomeAsUpEnabled(true);
@@ -122,6 +126,9 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                 break;
             case R.id.fab1:
                 anim();
+                Intent intent1 = new Intent(this, PopupActivity.class);
+                intent1.putExtra("data", "Test Popup");
+                startActivity(intent1);
                 Toast.makeText(this, "Button1", Toast.LENGTH_SHORT).show();  //나중에 지우던가 문구를 바꾸던가 해야함
 //아래 두 줄은 저장된 거 확인하는 xml만들어지면 수정하기
 //                Intent intent = new Intent(getApplicationContext(), MeatStorageActivity.class);
@@ -130,8 +137,8 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
             case R.id.fab2:
                 anim();
                 Toast.makeText(this, "MeatStorageActivity", Toast.LENGTH_SHORT).show();  //나중에 지우던가 문구를 바꾸던가 해야함
-                Intent intent = new Intent(getApplicationContext(), MeatStorageActivity.class);
-                startActivity(intent);
+                Intent intent2 = new Intent(getApplicationContext(), MeatStorageActivity.class);
+                startActivity(intent2);
                 break;
         }
     }
