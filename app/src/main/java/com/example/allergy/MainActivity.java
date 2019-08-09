@@ -2,6 +2,8 @@ package com.example.allergy;
 
 import android.app.ActionBar;
 import android.content.Intent;
+import android.location.Geocoder;
+import android.location.Address;
 import android.support.annotation.NonNull;
 import android.support.annotation.UiThread;
 import android.support.design.widget.FloatingActionButton;
@@ -22,18 +24,29 @@ import com.naver.maps.map.NaverMap;
 import com.naver.maps.map.NaverMapOptions;
 import com.naver.maps.map.NaverMapSdk;
 import com.naver.maps.map.OnMapReadyCallback;
+import com.naver.maps.map.overlay.InfoWindow;
 import com.naver.maps.map.overlay.LocationOverlay;
 import com.naver.maps.map.overlay.Marker;
 import com.naver.maps.map.overlay.OverlayImage;
 import com.naver.maps.map.util.FusedLocationSource;
 import com.naver.maps.map.util.MarkerIcons;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Map;
+import java.util.List;
+
 
 public class MainActivity extends FragmentActivity implements OnMapReadyCallback, View.OnClickListener {
 
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1000;
     private FusedLocationSource locationSource;
+    final ArrayList<StoreInfo> storeInfos = new ArrayList<>();
+    final ArrayList<Marker> markers = new ArrayList<>();
+    final ArrayList<InfoWindow> info = new ArrayList<>();
 
     LatLng coord = new LatLng(37.570694 , 126.968870);
     //플러팅 액션바1 (아래 3줄)
@@ -85,7 +98,47 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         fab2.setOnClickListener(this);
         //플러팅 액션바 여기까지2
 
+        //성북구 음식점 위도 경도
+        String file ="foodstore.json";
+        String result="";
+
+        final Geocoder geocoder = new Geocoder(this);
+
+        try{
+            InputStream is = getAssets().open(file);
+            int size = is.available();
+            byte[] buffer = new byte[size];
+            is.read(buffer);
+            is.close();
+
+            result = new String(buffer, "utf-8");
+
+            JSONObject json = new JSONObject(result);
+            JSONObject json1 =(JSONObject) json.get("SbModelRestaurantDesignate");
+            JSONArray jarr=json1.getJSONArray("row");
+            List<Address> list = null;
+
+            for(int i = 0; i<jarr.length(); i++){
+                json1=jarr.getJSONObject(i);
+                String name = json1.getString("UPSO_NM");
+                String addres_rd = json1.getString("SITE_ADDR_RD");
+                list = geocoder.getFromLocationName(addres_rd,10);
+
+                double latitude = list.get(0).getLatitude();
+                double longitude = list.get(0).getLongitude();
+
+                storeInfos.add(i,new StoreInfo(name,addres_rd,latitude,longitude));
+
+
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
     }
+
+
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
