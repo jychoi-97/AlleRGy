@@ -24,89 +24,94 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
-        android:layout_marginTop="50dp"
-        android:id="@+id/allergyMeatText"
-        app:layout_constraintTop_toBottomOf="@+id/allergyText"
         android:layout_marginLeft="35dp"
+        android:id="@+id/allergyMeatText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text ="육류"
+        android:layout_marginTop="28dp"
+        android:text="육류"
         android:textSize="15dp"
         android:textStyle="italic"
-        android:layout_marginBottom="5dp"/>
+        app:layout_constraintTop_toBottomOf="@+id/allergyText"
+        tools:layout_editor_absoluteX="126dp" />
 
 
-    <HorizontalScrollView
-        android:scrollbars="none"
-        android:layout_marginLeft="14dp"
-        android:id="@+id/allergyMeatScrollView"
+    <LinearLayout
+
         android:layout_marginTop="5dp"
-        app:layout_constraintTop_toBottomOf="@+id/allergyMeatText"
+        android:layout_marginLeft="14dp"
+        android:id="@+id/linear1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/allergyMeatText"
+        tools:layout_editor_absoluteX="106dp">
 
+        <CheckBox
+            android:id="@+id/meat1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:text="쇠고기" />
+
+        <CheckBox
+            android:id="@+id/meat2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="5dp"
+            android:text="닭고기" />
+
+        <CheckBox
+            android:id="@+id/meat3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:text="양고기" />
+
+        <CheckBox
+            android:id="@+id/meat4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:text="돼지고기" />
+
+
+    </LinearLayout>
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_marginLeft="14dp"
+            android:id="@+id/linear2"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linear1"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content">
-
-            <CheckBox
-                android:id="@+id/meat1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="쇠고기"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"/>
-
-            <CheckBox
-                android:id="@+id/meat2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="닭고기"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"/>
-
-            <CheckBox
-                android:id="@+id/meat3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="양고기"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"/>
-
-            <CheckBox
-                android:id="@+id/meat4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="돼지고기"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"/>
-
             <CheckBox
                 android:id="@+id/meat5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="오리고기"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"/>
-
+                android:layout_marginLeft="5dp" />
             <CheckBox
                 android:id="@+id/meat6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="염소고기"
-                android:layout_marginLeft="5dp"
+
                 android:layout_marginRight="5dp"/>
 
-
         </LinearLayout>
-    </HorizontalScrollView>
+
 
     <ImageView
+
 
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:id="@+id/lala"
-        app:layout_constraintTop_toBottomOf="@+id/allergyMeatScrollView"
+        app:layout_constraintTop_toBottomOf="@+id/linear2"
         android:src="@drawable/drawable_dash_line"
         android:layerType="software"
         android:layout_width="match_parent"
@@ -156,7 +161,7 @@
                 android:id="@+id/fruit2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
+                android:layout_marginLeft="8dp"
                 android:layout_marginRight="5dp"
                 android:text="키위" />
 
@@ -164,7 +169,7 @@
                 android:id="@+id/fruit3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
+                android:layout_marginLeft="17dp"
                 android:layout_marginRight="5dp"
                 android:text="바나나" />
 
@@ -188,6 +193,7 @@
     </HorizontalScrollView>
 
     <ImageView
+
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:id="@+id/lala2"
@@ -198,10 +204,11 @@
         android:layout_height="11dp" />
 
     <TextView
+        android:layout_marginLeft="35dp"
         android:layout_marginTop="10dp"
         app:layout_constraintTop_toBottomOf="@+id/lala2"
         android:id="@+id/allergyFishText"
-        android:layout_marginLeft="35dp"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text ="해산물류"
@@ -209,16 +216,13 @@
         android:textStyle="italic"
         android:layout_marginBottom="5dp"/>
 
-    <HorizontalScrollView
-        android:scrollbars="none"
-        android:layout_marginLeft="14dp"
-        android:layout_marginTop="5dp"
-        app:layout_constraintTop_toBottomOf="@+id/allergyFishText"
-        android:id="@+id/allergyFishScrollView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+
 
         <LinearLayout
+            android:layout_marginTop="5dp"
+            app:layout_constraintTop_toBottomOf="@+id/allergyFishText"
+            android:layout_marginLeft="14dp"
+            android:id="@+id/linear3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -235,7 +239,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="고등어"
-                android:layout_marginLeft="5dp"
+                android:layout_marginLeft="20dp"
                 android:layout_marginRight="5dp"/>
 
             <CheckBox
@@ -254,30 +258,42 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"/>
 
-            <CheckBox
-                android:id="@+id/fish5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="새우"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"/>
 
-            <CheckBox
-                android:id="@+id/fish6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="멸치"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"/>
+
+
 
         </LinearLayout>
-    </HorizontalScrollView>
+    <LinearLayout
+        android:layout_marginLeft="14dp"
+        android:id="@+id/linear4"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linear3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <CheckBox
+            android:id="@+id/fish6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="멸치"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"/>
+        <CheckBox
+            android:id="@+id/fish5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="새우"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="5dp"/>
+
+    </LinearLayout>
+
 
     <ImageView
+
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:id="@+id/lala3"
-        app:layout_constraintTop_toBottomOf="@+id/allergyFishScrollView"
+        app:layout_constraintTop_toBottomOf="@+id/linear4"
         android:src="@drawable/drawable_dash_line"
         android:layerType="software"
         android:layout_width="match_parent"
@@ -321,7 +337,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="아몬드"
-                android:layout_marginLeft="5dp"
+                android:layout_marginLeft="20dp"
                 android:layout_marginRight="5dp"/>
             <CheckBox
                 android:id="@+id/nut3"
@@ -336,21 +352,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="잣"
-                android:layout_marginLeft="5dp"
+                android:layout_marginLeft="17dp"
                 android:layout_marginRight="5dp"/>
 
         </LinearLayout>
     </HorizontalScrollView>
 
     <ImageView
-        android:layout_marginLeft="20dp"
+
         android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
         android:id="@+id/lala4"
-        app:layout_constraintTop_toBottomOf="@+id/allergyNutScrollView"
-        android:src="@drawable/drawable_dash_line"
-        android:layerType="software"
         android:layout_width="match_parent"
-        android:layout_height="11dp" />
+        android:layout_height="11dp"
+        android:layerType="software"
+        android:src="@drawable/drawable_dash_line"
+        app:layout_constraintTop_toBottomOf="@+id/allergyNutScrollView" />
     <TextView
         android:layout_marginTop="10dp"
         android:id="@+id/allergyMilkText"
@@ -363,15 +380,13 @@
         android:textStyle="italic"
         android:layout_marginBottom="5dp"/>
 
-    <HorizontalScrollView
-        android:layout_marginLeft="14dp"
-        android:layout_marginTop="5dp"
-        android:id="@+id/allergyMilkScrollView"
-        app:layout_constraintTop_toBottomOf="@+id/allergyMilkText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+
 
         <LinearLayout
+            android:id="@+id/linearmilk"
+            app:layout_constraintTop_toBottomOf="@+id/allergyMilkText"
+            android:layout_marginLeft="14dp"
+            android:layout_marginTop="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -388,7 +403,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="계란"
-                android:layout_marginLeft="5dp"
+                android:layout_marginLeft="20dp"
                 android:layout_marginRight="5dp"/>
 
             <CheckBox
@@ -396,7 +411,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="치즈"
-                android:layout_marginLeft="5dp"
+                android:layout_marginLeft="17dp"
                 android:layout_marginRight="5dp"/>
 
             <CheckBox
@@ -404,26 +419,27 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="버터"
-                android:layout_marginLeft="5dp"
+                android:layout_marginLeft="18dp"
                 android:layout_marginRight="5dp"/>
 
 
 
 
         </LinearLayout>
-    </HorizontalScrollView>
 
 
     <Button
+
         android:id="@+id/allergyStorageButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="160dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginLeft="164dp"
+        android:layout_marginTop="12dp"
         android:gravity="center_horizontal"
 
+        android:layout_centerInParent="true"
         android:text="확인"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/allergyMilkScrollView" />
+        app:layout_constraintTop_toBottomOf="@+id/linearmilk" />
 
 </android.support.constraint.ConstraintLayout>

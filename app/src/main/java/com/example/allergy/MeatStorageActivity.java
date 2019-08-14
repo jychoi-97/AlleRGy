@@ -103,19 +103,6 @@ public class MeatStorageActivity extends AppCompatActivity {
 
 
 
-//        meatStorageButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                setStringArrayPref("usersAllergyList", meatArrayList);
-//
-////                Toast.makeText(getApplicationContext(), meatArrayList.get(0) + meatArrayList.get(1), Toast.LENGTH_LONG).show();
-//
-//
-//
-//
-//            }
-//        });
-
         meatStorageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -189,113 +176,6 @@ public class MeatStorageActivity extends AppCompatActivity {
     }
 
 
-
-
-//    public void onCheckboxClicked(View view) {
-//
-//        boolean checked = ((CheckBox) view).isChecked();
-//
-//
-//        switch(view.getId()) {
-//            case R.id.meat1:
-//                if (checked)
-//                    meatArrayList.add("쇠고기");
-//                break;
-//            case R.id.meat2:
-//                if (checked)
-//                    meatArrayList.add("닭고기");
-//                break;
-//            case R.id.meat3:
-//                if (checked)
-//                    meatArrayList.add("양고기");
-//                break;
-//            case R.id.meat4:
-//                if (checked)
-//                    meatArrayList.add("돼지고기");
-//                break;
-//            case R.id.meat5:
-//                if (checked)
-//                    meatArrayList.add("오리고기");
-//                break;
-//            case R.id.meat6:
-//                if (checked)
-//                    meatArrayList.add("염소고기");
-//                break;
-//            case R.id.fruit1:
-//                if (checked)
-//                    meatArrayList.add("복숭아");
-//                break;
-//            case R.id.fruit2:
-//                if (checked)
-//                    meatArrayList.add("키위");
-//                break;
-//            case R.id.fruit3:
-//                if (checked)
-//                    meatArrayList.add("바나나");
-//                break;
-//            case R.id.fruit4:
-//                if (checked)
-//                    meatArrayList.add("딸기");
-//                break;
-//            case R.id.fish1:
-//                if (checked)
-//                    meatArrayList.add("조개");
-//                break;
-//            case R.id.fish2:
-//                if (checked)
-//                    meatArrayList.add("고등어");
-//                break;
-//            case R.id.fish3:
-//                if (checked)
-//                    meatArrayList.add("오징어");
-//                break;
-//            case R.id.fish4:
-//                if (checked)
-//                    meatArrayList.add("게");
-//                break;
-//            case R.id.fish5:
-//                if (checked)
-//                    meatArrayList.add("새우");
-//                break;
-//            case R.id.fish6:
-//                if (checked)
-//                    meatArrayList.add("멸치");
-//                break;
-//            case R.id.nut1:
-//                if (checked)
-//                    meatArrayList.add("호두");
-//                break;
-//            case R.id.nut2:
-//                if (checked)
-//                    meatArrayList.add("아몬드");
-//                break;
-//            case R.id.nut3:
-//                if (checked)
-//                    meatArrayList.add("땅콩");
-//                break;
-//            case R.id.nut4:
-//                if (checked)
-//                    meatArrayList.add("잣");
-//                break;
-//            case R.id.milk1:
-//                if (checked)
-//                    meatArrayList.add("우유");
-//                break;
-//            case R.id.milk2:
-//                if (checked)
-//                    meatArrayList.add("계란");
-//                break;
-//            case R.id.milk3:
-//                if (checked)
-//                    meatArrayList.add("치즈");
-//                break;
-//            case R.id.milk4:
-//                if (checked)
-//                    meatArrayList.add("버터");
-//                break;
-//
-//        }
-//    }
     public void setStringArrayPref(String key, ArrayList<String> values) {
         SharedPreferences prefs = getSharedPreferences("users_allery_list", MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
