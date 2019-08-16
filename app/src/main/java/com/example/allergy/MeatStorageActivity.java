@@ -1,6 +1,7 @@
 
 package com.example.allergy;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.preference.PreferenceManager;
@@ -165,175 +166,221 @@ public class MeatStorageActivity extends AppCompatActivity {
             public void onClick(View v) {
                 
                 if(meat1.isChecked()) {
-                    meatArrayList.add("쇠고기");
-                    editor.putBoolean("check1", meat1.isChecked());
-
+                    if(!meatArrayList.contains("쇠고기")) {
+                        meatArrayList.add("쇠고기");
+                        editor.putBoolean("check1", meat1.isChecked());
+                    }
                 } else{
                     editor.putBoolean("check1", false);
 
                 }
                 if(meat2.isChecked()) {
-                    meatArrayList.add("닭고기");
-                    editor.putBoolean("check2", meat2.isChecked());
+                    if(!meatArrayList.contains("닭고기")) {
+                        meatArrayList.add("닭고기");
+                        editor.putBoolean("check2", meat2.isChecked());
+                    }
                 } else{
                     editor.putBoolean("check2", false);
 
                 }
                 if(meat3.isChecked()) {
-                    meatArrayList.add("양고기");
-                    editor.putBoolean("check3", meat3.isChecked());
+                    if(!meatArrayList.contains("양고기")) {
+                        meatArrayList.add("양고기");
+                        editor.putBoolean("check3", meat3.isChecked());
+                    }
                 } else{
                     editor.putBoolean("check3", false);
 
                 }
                 if(meat4.isChecked()) {
-                    meatArrayList.add("돼지고기");
-                    editor.putBoolean("check4", meat4.isChecked());
+                    if(!meatArrayList.contains("돼지고기")) {
+                        meatArrayList.add("돼지고기");
+                        editor.putBoolean("check4", meat4.isChecked());
+                    }
                 } else{
                     editor.putBoolean("check4", false);
 
                 }
                 if(meat5.isChecked()) {
-                    meatArrayList.add("오리고기");
-                    editor.putBoolean("check5", meat5.isChecked());
+                    if(!meatArrayList.contains("오리고기")) {
+                        meatArrayList.add("오리고기");
+                        editor.putBoolean("check5", meat5.isChecked());
+                    }
                 } else{
                     editor.putBoolean("check5", false);
 
                 }
                 if(meat6.isChecked()) {
-                    meatArrayList.add("염소고기");
-                    editor.putBoolean("check6", meat6.isChecked());
+                    if(!meatArrayList.contains("염소고기")) {
+                        meatArrayList.add("염소고기");
+                        editor.putBoolean("check6", meat6.isChecked());
+                    }
                 } else{
                     editor.putBoolean("check6", false);
 
                 }
                 if(fruit1.isChecked()) {
-                    meatArrayList.add("복숭아");
-                    editor.putBoolean("check7", fruit1.isChecked());
+                    if(!meatArrayList.contains("복숭아")) {
+                        meatArrayList.add("복숭아");
+                        editor.putBoolean("check7", fruit1.isChecked());
+                    }
                 } else{
                     editor.putBoolean("check7", false);
 
                 }
                 if(fruit2.isChecked()) {
-                    meatArrayList.add("키위");
-                    editor.putBoolean("check8", fruit2.isChecked());
+                    if(!meatArrayList.contains("키위")) {
+                        meatArrayList.add("키위");
+                        editor.putBoolean("check8", fruit2.isChecked());
+                    }
                 } else{
                     editor.putBoolean("check8", false);
 
                 }
                 if(fruit3.isChecked()) {
-                    meatArrayList.add("바나나");
-                    editor.putBoolean("check9", fruit3.isChecked());
+                    if(!meatArrayList.contains("바나나")) {
+                        meatArrayList.add("바나나");
+                        editor.putBoolean("check9", fruit3.isChecked());
+                    }
                 } else{
                     editor.putBoolean("check9", false);
 
                 }
                 if(fruit4.isChecked()) {
-                    meatArrayList.add("딸기");
-                    editor.putBoolean("check10", fruit4.isChecked());
+                    if(!meatArrayList.contains("딸기")) {
+                        meatArrayList.add("딸기");
+                        editor.putBoolean("check10", fruit4.isChecked());
+                    }
                 } else{
                     editor.putBoolean("check10", false);
 
                 }
                 if(fish1.isChecked()){
-                    meatArrayList.add("조개");
-                    editor.putBoolean("check11", fish1.isChecked());
+                    if(!meatArrayList.contains("조개")) {
+                        meatArrayList.add("조개");
+                        editor.putBoolean("check11", fish1.isChecked());
+                    }
                 } else{
                     editor.putBoolean("check11", false);
 
                 }
                 if(fish2.isChecked()) {
-                    meatArrayList.add("고등어");
-                    editor.putBoolean("check12", fish2.isChecked());
+                    if(!meatArrayList.contains("고등어")) {
+                        meatArrayList.add("고등어");
+                        editor.putBoolean("check12", fish2.isChecked());
+                    }
                 } else{
                     editor.putBoolean("check12", false);
 
                 }
                 if(fish3.isChecked()) {
-                    meatArrayList.add("오징어");
-                    editor.putBoolean("check13", fish3.isChecked());
+                    if(!meatArrayList.contains("오징어")) {
+                        meatArrayList.add("오징어");
+                        editor.putBoolean("check13", fish3.isChecked());
+                    }
                 } else{
                     editor.putBoolean("check13", false);
 
                 }
                 if(fish4.isChecked()) {
-                    meatArrayList.add("게");
-                    editor.putBoolean("check14", fish4.isChecked());
+                    if(!meatArrayList.contains("게")) {
+                        meatArrayList.add("게");
+                        editor.putBoolean("check14", fish4.isChecked());
+                    }
                 } else{
                     editor.putBoolean("check14", false);
 
                 }
                 if(fish5.isChecked()) {
-                    meatArrayList.add("새우");
-                    editor.putBoolean("check15", fish5.isChecked());
+                    if(!meatArrayList.contains("새우")) {
+                        meatArrayList.add("새우");
+                        editor.putBoolean("check15", fish5.isChecked());
+                    }
                 } else{
                     editor.putBoolean("check15", false);
 
                 }
                 if(fish6.isChecked()){
-                    meatArrayList.add("멸치");
-                    editor.putBoolean("check16", fish6.isChecked());
+                    if(!meatArrayList.contains("멸치")) {
+                        meatArrayList.add("멸치");
+                        editor.putBoolean("check16", fish6.isChecked());
+                    }
                 } else{
                     editor.putBoolean("check16", false);
 
                 }
                 if(nut1.isChecked()) {
-                    meatArrayList.add("호두");
-                    editor.putBoolean("check17", nut1.isChecked());
+                    if(!meatArrayList.contains("호두")) {
+                        meatArrayList.add("호두");
+                        editor.putBoolean("check17", nut1.isChecked());
+                    }
                 } else{
                     editor.putBoolean("check17", false);
 
                 }
                 if(nut2.isChecked()) {
-                    meatArrayList.add("아몬드");
-                    editor.putBoolean("check18", nut2.isChecked());
+                    if(!meatArrayList.contains("아몬드")) {
+                        meatArrayList.add("아몬드");
+                        editor.putBoolean("check18", nut2.isChecked());
+                    }
                 } else{
                     editor.putBoolean("check18", false);
 
                 }
                 if(nut3.isChecked()) {
-                    meatArrayList.add("땅콩");
-                    editor.putBoolean("check19", nut3.isChecked());
+                    if(!meatArrayList.contains("땅콩")) {
+                        meatArrayList.add("땅콩");
+                        editor.putBoolean("check19", nut3.isChecked());
+                    }
                 } else{
                     editor.putBoolean("check19", false);
 
                 }
                 if(nut4.isChecked()) {
-                    meatArrayList.add("잣");
-                    editor.putBoolean("check20", nut4.isChecked());
+                    if(!meatArrayList.contains("잣")) {
+                        meatArrayList.add("잣");
+                        editor.putBoolean("check20", nut4.isChecked());
+                    }
                 } else{
                     editor.putBoolean("check20", false);
 
                 }
                 if(milk1.isChecked()) {
-                    meatArrayList.add("우유");
-                    editor.putBoolean("check21", milk1.isChecked());
+                    if(!meatArrayList.contains("우유")) {
+                        meatArrayList.add("우유");
+                        editor.putBoolean("check21", milk1.isChecked());
+                    }
                 } else{
                     editor.putBoolean("check21", false);
 
                 }
                 if(milk2.isChecked()) {
-                    meatArrayList.add("계란");
-                    editor.putBoolean("check22", milk2.isChecked());
+                    if(!meatArrayList.contains("계란")) {
+                        meatArrayList.add("계란");
+                        editor.putBoolean("check22", milk2.isChecked());
+                    }
                 } else{
                     editor.putBoolean("check22", false);
 
                 }
                 if(milk3.isChecked()) {
-                    meatArrayList.add("치즈");
-                    editor.putBoolean("check23", milk3.isChecked());
+                    if(!meatArrayList.contains("치즈")) {
+                        meatArrayList.add("치즈");
+                        editor.putBoolean("check23", milk3.isChecked());
+                    }
                 } else{
                     editor.putBoolean("check23", false);
 
                 }
                 if(milk4.isChecked()) {
-                    meatArrayList.add("버터");
-                    editor.putBoolean("check24", milk4.isChecked());
+                    if(!meatArrayList.contains("버터")) {
+                        meatArrayList.add("버터");
+                        editor.putBoolean("check24", milk4.isChecked());
+                    }
                 } else{
                     editor.putBoolean("check24", false);
 
                 }
-
                 editor.commit();
                 setStringArrayPref("usersAllergyList", meatArrayList);
 
@@ -367,6 +414,8 @@ public class MeatStorageActivity extends AppCompatActivity {
         } else {
             editor.putString(key, null);
         }
+        Toast.makeText(this, "알러지가 등록되었습니다.", Toast.LENGTH_SHORT).show();
         editor.commit();
+        finish();
     }
 }

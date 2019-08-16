@@ -182,22 +182,16 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         switch (id) {
             case R.id.fab:
                 anim();
-                Toast.makeText(this, "Floating Action Button", Toast.LENGTH_SHORT).show();  //나중에 지우던가 문구를 바꾸던가 해야함
+                Toast.makeText(this, "원하는 메뉴를 선택하세요.", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.fab1:
                 anim();
                 Intent intent1 = new Intent(this, PopupActivity.class);
                 intent1.putExtra("data", "Test Popup");
                 startActivity(intent1);
-                Toast.makeText(this, "Button1", Toast.LENGTH_SHORT).show();  //나중에 지우던가 문구를 바꾸던가 해야함
-//아래 두 줄은 저장된 거 확인하는 xml만들어지면 수정하기
-//                Intent intent = new Intent(getApplicationContext(), MeatStorageActivity.class);
-//                startActivity(intent);
                 break;
             case R.id.fab2:
                 anim();
-
-                Toast.makeText(this, "MeatStorageActivity", Toast.LENGTH_SHORT).show();  //나중에 지우던가 문구를 바꾸던가 해야함
                 Intent intent2 = new Intent(getApplicationContext(), MeatStorageActivity.class);
                 startActivity(intent2);
                 break;
