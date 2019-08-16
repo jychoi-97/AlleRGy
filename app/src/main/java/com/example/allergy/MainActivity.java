@@ -154,10 +154,17 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(@NonNull NaverMap naverMap) {
         //naverMap.setLocationSource(locationSource);
 
-        Marker marker = new Marker();
-        marker.setPosition(new LatLng(37.570694 , 126.968870));
-        marker.setMap(naverMap);
-        marker.setIcon(MarkerIcons.BLACK);
+//        Marker marker = new Marker();
+//        marker.setPosition(new LatLng(37.570694 , 126.968870));
+//        marker.setMap(naverMap);
+//        marker.setIcon(MarkerIcons.BLACK);
+
+        for(int i =0; i<storeInfos.size();i++){
+            markers.add(new Marker());
+            markers.get(i).setPosition(new LatLng(storeInfos.get(i).getLatitude(),storeInfos.get(i).getLongitude()));
+            markers.get(i).setMap(naverMap);
+            markers.get(i).setIcon(MarkerIcons.BLACK);
+        }
     }
 
 
