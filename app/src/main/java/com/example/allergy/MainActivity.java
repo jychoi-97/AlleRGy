@@ -1,14 +1,18 @@
 package com.example.allergy;
 
 import android.app.ActionBar;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.Geocoder;
 import android.location.Address;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.annotation.UiThread;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -27,6 +31,7 @@ import com.naver.maps.map.OnMapReadyCallback;
 import com.naver.maps.map.overlay.InfoWindow;
 import com.naver.maps.map.overlay.LocationOverlay;
 import com.naver.maps.map.overlay.Marker;
+import com.naver.maps.map.overlay.Overlay;
 import com.naver.maps.map.overlay.OverlayImage;
 import com.naver.maps.map.util.FusedLocationSource;
 import com.naver.maps.map.util.MarkerIcons;
@@ -53,6 +58,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     private Animation fab_open, fab_close;
     private Boolean isFabOpen = false;
     private FloatingActionButton fab, fab1, fab2;
+    private Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -138,8 +144,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
 
-
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         if(item.getItemId()== android.R.id.home){
@@ -149,23 +153,89 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         return super.onOptionsItemSelected(item);
     }
 
-//    @UiThread
+    @UiThread
     @Override
     public void onMapReady(@NonNull NaverMap naverMap) {
-        //naverMap.setLocationSource(locationSource);
+//        for (int j = 0; j < storeInfos.size(); j++) {
+//            info.add(new InfoWindow());
+//            info.get(j).setAdapter(new InfoWindow.DefaultTextAdapter(context) {
+//                @NonNull
+//                @Override
+//                public CharSequence getText(@NonNull InfoWindow infoWindow) {
+//                    int k = 0;
+//                    return storeInfos.get(k++).getName();
+//                }
+//            });
+//        }
 
-//        Marker marker = new Marker();
-//        marker.setPosition(new LatLng(37.570694 , 126.968870));
-//        marker.setMap(naverMap);
-//        marker.setIcon(MarkerIcons.BLACK);
+//        final InfoWindow infoWindow = new InfoWindow();
+//        infoWindow.setAdapter(new InfoWindow.DefaultTextAdapter(context) {
+//            @NonNull
+//            @Override
+//            public CharSequence getText(@NonNull InfoWindow infoWindow) {
+//                return (CharSequence)infoWindow.getMarker().getTag();
+//            }
+//        });
+//
+//        final int k=0;
 
-        for(int i =0; i<storeInfos.size();i++){
+        for (int i = 0; i < storeInfos.size(); i++) {
             markers.add(new Marker());
-            markers.get(i).setPosition(new LatLng(storeInfos.get(i).getLatitude(),storeInfos.get(i).getLongitude()));
+            markers.get(i).setPosition(new LatLng(storeInfos.get(i).getLatitude(), storeInfos.get(i).getLongitude()));
             markers.get(i).setMap(naverMap);
             markers.get(i).setIcon(MarkerIcons.BLACK);
+            markers.get(i).setTag(storeInfos.get(i).getName());
+            markers.get(i).setOnClickListener(new Overlay.OnClickListener() {
+                @Override
+                public boolean onClick(@NonNull Overlay overlay) {
+                    final AlertDialog.Builder alert = new AlertDialog.Builder(MainActivity.this);
+
+                    alert.setTitle("가게이름");
+                    alert.setMessage("메뉴정보");
+                    alert.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Toast.makeText(MainActivity.this,"확인",Toast.LENGTH_SHORT).show();
+                        }
+                    });
+//                    alert.setNegativeButton("이동안함", new DialogInterface.OnClickListener() {
+//                        @Override
+//                        public void onClick(DialogInterface dialog, int which) {
+//
+//                            Toast.makeText(MainActivity.this,"메뉴를 고르세요",Toast.LENGTH_SHORT).show();
+//                        }
+//                    });
+                    alert.show();
+                    return true;
+                }
+
+
+            });
+
+
         }
+
     }
+//    public void showDialog(){
+//        final AlertDialog.Builder alert = new AlertDialog.Builder(MainActivity.this);
+//
+//        alert.setTitle("가게이름");
+//        alert.setMessage("메뉴정보");
+//        alert.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//                Toast.makeText(MainActivity.this,"메뉴를 고르세요",Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//        alert.setNegativeButton("이동안함", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//
+//                Toast.makeText(MainActivity.this,"메뉴를 고르세요",Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//        alert.show();
+//    }
 
 
     public void onRequestPermissionResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
