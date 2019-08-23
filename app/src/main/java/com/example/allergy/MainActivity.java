@@ -7,13 +7,11 @@ import android.content.Intent;
 import android.location.Geocoder;
 import android.location.Address;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.annotation.UiThread;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
@@ -29,10 +27,8 @@ import com.naver.maps.map.NaverMapOptions;
 import com.naver.maps.map.NaverMapSdk;
 import com.naver.maps.map.OnMapReadyCallback;
 import com.naver.maps.map.overlay.InfoWindow;
-import com.naver.maps.map.overlay.LocationOverlay;
 import com.naver.maps.map.overlay.Marker;
 import com.naver.maps.map.overlay.Overlay;
-import com.naver.maps.map.overlay.OverlayImage;
 import com.naver.maps.map.util.FusedLocationSource;
 import com.naver.maps.map.util.MarkerIcons;
 
@@ -41,7 +37,6 @@ import org.json.JSONObject;
 
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Map;
 import java.util.List;
 
 
@@ -57,7 +52,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     //플러팅 액션바1 (아래 3줄)
     private Animation fab_open, fab_close;
     private Boolean isFabOpen = false;
-    private FloatingActionButton fab, fab1, fab2;
+    private FloatingActionButton fab, fab_check, fab_save;
     private Context context;
 
     @Override
@@ -97,12 +92,12 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         fab_close = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fab_close);
 
         fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab1 = (FloatingActionButton) findViewById(R.id.fab1);
-        fab2 = (FloatingActionButton) findViewById(R.id.fab2);
+        fab_check = (FloatingActionButton) findViewById(R.id.fab_check);
+        fab_save = (FloatingActionButton) findViewById(R.id.fab_save);
 
         fab.setOnClickListener(this);
-        fab1.setOnClickListener(this);
-        fab2.setOnClickListener(this);
+        fab_check.setOnClickListener(this);
+        fab_save.setOnClickListener(this);
         //플러팅 액션바 여기까지2
 
         //성북구 음식점 위도 경도
@@ -255,13 +250,13 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                 anim();
                 Toast.makeText(this, "원하는 메뉴를 선택하세요.", Toast.LENGTH_SHORT).show();
                 break;
-            case R.id.fab1:
+            case R.id.fab_check:
                 anim();
                 Intent intent1 = new Intent(this, PopupActivity.class);
                 intent1.putExtra("data", "Test Popup");
                 startActivity(intent1);
                 break;
-            case R.id.fab2:
+            case R.id.fab_save:
                 anim();
                 Intent intent2 = new Intent(getApplicationContext(), MeatStorageActivity.class);
                 startActivity(intent2);
@@ -271,16 +266,16 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 
     public void anim(){
         if(isFabOpen){
-            fab1.startAnimation(fab_close);
-            fab2.startAnimation(fab_close);
-            fab1.setClickable(false);
-            fab2.setClickable(false);
+            fab_check.startAnimation(fab_close);
+            fab_save.startAnimation(fab_close);
+            fab_check.setClickable(false);
+            fab_save.setClickable(false);
             isFabOpen = false;
         }else{
-            fab1.startAnimation(fab_open);
-            fab2.startAnimation(fab_open);
-            fab1.setClickable(true);
-            fab2.setClickable(true);
+            fab_check.startAnimation(fab_open);
+            fab_save.startAnimation(fab_open);
+            fab_check.setClickable(true);
+            fab_save.setClickable(true);
             isFabOpen = true;
         }
     }
