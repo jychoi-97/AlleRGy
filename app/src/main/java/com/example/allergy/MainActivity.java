@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import com.naver.maps.geometry.LatLng;
@@ -50,7 +51,9 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     final ArrayList<Marker> markers = new ArrayList<>();
     final ArrayList<String> foodKeyList=new ArrayList<>();
 
-    LatLng coord = new LatLng(37.570694 , 126.968870);
+//    final ArrayAdapter<String> adapter = new ArrayAdapter<String>(MainActivity.this, android.R.layout.select_dialog_item);
+
+
     //플러팅 액션바1 (아래 3줄)
     private Animation fab_open, fab_close;
     private Boolean isFabOpen = false;
@@ -198,9 +201,21 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                 @Override
                 public boolean onClick(@NonNull Overlay overlay) {
                     final AlertDialog.Builder alert = new AlertDialog.Builder(MainActivity.this);
-
+                    final ArrayAdapter<String> adapter = new ArrayAdapter<String>(MainActivity.this, android.R.layout.select_dialog_item);
+//                    String foodName = null;
+                    for(int h =0; h<foodKeyList.size();h++){
+                        adapter.add(foodKeyList.get(h));
+                    }
                     alert.setTitle(storeName);
-                    alert.setMessage(foodName());
+//                    alert.setMessage();
+
+                    alert.setAdapter(adapter, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            String strName = adapter.getItem(which);
+//                            AlertDialog.Builder innBuilder = new AlertDialog.Builder(MainActivity.this);
+                        }
+                    });
                     alert.setPositiveButton("확인", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
@@ -288,11 +303,11 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
-    public String foodName(){
-        for(int i =0; i<foodKeyList.size();i++) {
-           return foodKeyList.get(i)+" ";
-        }
-        return null;
-    }
+//    public String foodName(){
+//        for(int i =0; i<foodKeyList.size();i++) {
+//           return foodKeyList.get(i)+" ";
+//        }
+//        return null;
+//    }
 
 }
