@@ -226,14 +226,17 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 //                            adapter.add(foodKeyList.get(h) + "(X)");
 //                        } else{
                             adapter.add(foodName.get(h));
+                        adapter.notifyDataSetChanged();
 //                        }
                     }
+                    adapter.notifyDataSetChanged();
                     alert.setTitle(storeName);
 //                    alert.setMessage();
                     alert.setAdapter(adapter, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             String strName = adapter.getItem(which);
+                            adapter.notifyDataSetChanged();
 //                            AlertDialog.Builder innBuilder = new AlertDialog.Builder(MainActivity.this);
                         }
                     });

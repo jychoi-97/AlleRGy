@@ -411,7 +411,9 @@ public class MeatStorageActivity extends AppCompatActivity {
         }
         if (!values.isEmpty()) {
             editor.putString(key, a.toString());
-            Toast.makeText(this, "알러지가 등록되었습니다. 종료 후 다시 실행하세요.", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+            Toast.makeText(this, "알러지가 등록되었습니다.", Toast.LENGTH_SHORT).show();
+            startActivity(intent);
         } else {
             editor.putString(key, null);
             Toast.makeText(this, "알러지가 존재하지 않습니다.", Toast.LENGTH_SHORT).show();
