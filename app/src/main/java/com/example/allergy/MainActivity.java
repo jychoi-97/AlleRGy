@@ -83,9 +83,10 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         if (mapFragment == null) {
 
             mapFragment = mapFragment.newInstance(new NaverMapOptions().camera(new CameraPosition(
-                    NaverMap.DEFAULT_CAMERA_POSITION.target, NaverMap.DEFAULT_CAMERA_POSITION.zoom,20,45)));
+                    new LatLng(37.5913103 , 127.02213119999999), NaverMap.DEFAULT_CAMERA_POSITION.zoom,20,45)));
             fm.beginTransaction().add(R.id.map, mapFragment).commit();
         }
+
         mapFragment.getMapAsync(this);
         //locationSource = new FusedLocationSource(this, LOCATION_PERMISSION_REQUEST_CODE);
 
