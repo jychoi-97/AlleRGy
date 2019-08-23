@@ -11,9 +11,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
         <activity android:name=".MeatStorageActivity"/>
-        <activity android:name=".PopupActivity" android:theme="@android:style/Theme.Dialog" />
-
-        <activity android:name=".MainActivity" />
+        <activity android:name=".PopupActivity"
+            android:theme="@android:style/Theme.Dialog" />
+        <activity android:name=".MainActivity"
+            android:theme="@style/AppTheme"/>
         <activity android:name=".IntroActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
