@@ -29,6 +29,7 @@
         android:layout_height="wrap_content">
         <TextView
             android:id="@+id/txtText"
+            android:hint="알러지가 없습니다."
             android:textSize="15sp"
             android:textColor="#000"
             android:alpha="0.87"

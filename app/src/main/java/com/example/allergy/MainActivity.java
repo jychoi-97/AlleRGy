@@ -248,7 +248,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         switch (id) {
             case R.id.fab:
                 anim();
-                Toast.makeText(this, "원하는 메뉴를 선택하세요.", Toast.LENGTH_SHORT).show();
+
                 break;
             case R.id.fab_check:
                 anim();
@@ -272,11 +272,13 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
             fab_save.setClickable(false);
             isFabOpen = false;
         }else{
+            Toast.makeText(this, "원하는 메뉴를 선택하세요.", Toast.LENGTH_SHORT).show();
             fab_check.startAnimation(fab_open);
             fab_save.startAnimation(fab_open);
             fab_check.setClickable(true);
             fab_save.setClickable(true);
             isFabOpen = true;
+
         }
     }
 }
