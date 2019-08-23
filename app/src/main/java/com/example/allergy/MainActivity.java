@@ -165,7 +165,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                     foodKeyList.add(b);
                 }
 
-                for( int j =0;j<1;j++){
+                for( int j =0;j<foodKeyList.size();j++){
                     foodValueList.add(foodObject.getString(foodKeyList.get(j)));
                     Log.d("foodList",foodValueList.get(j));
                 }
