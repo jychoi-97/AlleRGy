@@ -13,10 +13,12 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AlertDialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import com.naver.maps.geometry.LatLng;
@@ -37,6 +39,7 @@ import org.json.JSONObject;
 
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 
@@ -46,9 +49,11 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     private FusedLocationSource locationSource;
     final ArrayList<StoreInfo> storeInfos = new ArrayList<>();
     final ArrayList<Marker> markers = new ArrayList<>();
-    final ArrayList<StoreInfo> menuName = new ArrayList<>();
+    final ArrayList<String> foodKeyList=new ArrayList<>();
 
-    LatLng coord = new LatLng(37.570694 , 126.968870);
+//    final ArrayAdapter<String> adapter = new ArrayAdapter<String>(MainActivity.this, android.R.layout.select_dialog_item);
+
+
     //플러팅 액션바1 (아래 3줄)
     private Animation fab_open, fab_close;
     private Boolean isFabOpen = false;
@@ -124,6 +129,14 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                 json1=jarr.getJSONObject(i);
                 String name = json1.getString("UPSO_NM");
                 String addres_rd = json1.getString("SITE_ADDR_RD");
+                String food = json1.getString("MAIN_EDF");
+                JSONObject foodObject = new JSONObject(food);
+                Iterator iterator = foodObject.keys();
+                while(iterator.hasNext()){
+                    String b = iterator.next().toString();
+                    Log.d("food",b);
+                    foodKeyList.add(b);
+                }
                 list = geocoder.getFromLocationName(addres_rd,10);
 
                 double latitude = list.get(0).getLatitude();
@@ -131,8 +144,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 
                 storeInfos.add(i,new StoreInfo(name,addres_rd,latitude,longitude));
 
-                String menuN = json1.getString("MAIN_EDF");
-                menuName.add(i, new StoreInfo(menuN,addres_rd,latitude,longitude));
 
             }
         }catch (Exception e){
@@ -176,6 +187,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 //        });
 //
 //        final int k=0;
+
         for (int i = 0; i < storeInfos.size(); i++) {
 
             markers.add(new Marker());
@@ -184,26 +196,32 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
             markers.get(i).setIcon(MarkerIcons.BLACK);
             markers.get(i).setTag(storeInfos.get(i).getName());
             final String storeName = storeInfos.get(i).getName();
+
             markers.get(i).setOnClickListener(new Overlay.OnClickListener() {
                 @Override
                 public boolean onClick(@NonNull Overlay overlay) {
                     final AlertDialog.Builder alert = new AlertDialog.Builder(MainActivity.this);
-
+                    final ArrayAdapter<String> adapter = new ArrayAdapter<String>(MainActivity.this, android.R.layout.select_dialog_item);
+//                    String foodName = null;
+                    for(int h =0; h<foodKeyList.size();h++){
+                        adapter.add(foodKeyList.get(h));
+                    }
                     alert.setTitle(storeName);
-                    alert.setMessage("");
+//                    alert.setMessage();
+
+                    alert.setAdapter(adapter, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            String strName = adapter.getItem(which);
+//                            AlertDialog.Builder innBuilder = new AlertDialog.Builder(MainActivity.this);
+                        }
+                    });
                     alert.setPositiveButton("확인", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             Toast.makeText(MainActivity.this,"확인",Toast.LENGTH_SHORT).show();
                         }
                     });
-//                    alert.setNegativeButton("이동안함", new DialogInterface.OnClickListener() {
-//                        @Override
-//                        public void onClick(DialogInterface dialog, int which) {
-//
-//                            Toast.makeText(MainActivity.this,"메뉴를 고르세요",Toast.LENGTH_SHORT).show();
-//                        }
-//                    });
                     alert.show();
                     return true;
                 }
@@ -284,4 +302,12 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 
         }
     }
+
+//    public String foodName(){
+//        for(int i =0; i<foodKeyList.size();i++) {
+//           return foodKeyList.get(i)+" ";
+//        }
+//        return null;
+//    }
+
 }
