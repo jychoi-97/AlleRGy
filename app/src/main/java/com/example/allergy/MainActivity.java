@@ -180,17 +180,19 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 //        final int k=0;
 
         for (int i = 0; i < storeInfos.size(); i++) {
+
             markers.add(new Marker());
             markers.get(i).setPosition(new LatLng(storeInfos.get(i).getLatitude(), storeInfos.get(i).getLongitude()));
             markers.get(i).setMap(naverMap);
             markers.get(i).setIcon(MarkerIcons.BLACK);
             markers.get(i).setTag(storeInfos.get(i).getName());
+            final String storeName = storeInfos.get(i).getName();
             markers.get(i).setOnClickListener(new Overlay.OnClickListener() {
                 @Override
                 public boolean onClick(@NonNull Overlay overlay) {
                     final AlertDialog.Builder alert = new AlertDialog.Builder(MainActivity.this);
 
-                    alert.setTitle("가게이름");
+                    alert.setTitle(storeName);
                     alert.setMessage("메뉴정보");
                     alert.setPositiveButton("확인", new DialogInterface.OnClickListener() {
                         @Override
