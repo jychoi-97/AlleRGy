@@ -4,6 +4,7 @@ import android.app.ActionBar;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.location.Geocoder;
 import android.location.Address;
 import android.support.annotation.NonNull;
@@ -35,6 +36,7 @@ import com.naver.maps.map.util.FusedLocationSource;
 import com.naver.maps.map.util.MarkerIcons;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.InputStream;
@@ -48,8 +50,10 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1000;
     private FusedLocationSource locationSource;
     final ArrayList<StoreInfo> storeInfos = new ArrayList<>();
+    final ArrayList<FoodInfo> foodInfos = new ArrayList<>();
     final ArrayList<Marker> markers = new ArrayList<>();
-    final ArrayList<String> foodKeyList=new ArrayList<>();
+//    final ArrayList<String> foodKeyList=new ArrayList<>();
+//    final ArrayList<String> foodValueList = new ArrayList<>();
 
 //    final ArrayAdapter<String> adapter = new ArrayAdapter<String>(MainActivity.this, android.R.layout.select_dialog_item);
 
@@ -59,6 +63,24 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     private Boolean isFabOpen = false;
     private FloatingActionButton fab, fab_check, fab_save;
     private Context context;
+
+    public ArrayList<String> getStringArrayList(String key){
+        SharedPreferences prefs = getSharedPreferences("users_allery_list", MODE_PRIVATE);
+        String json = prefs.getString(key, null);
+        ArrayList<String> valueList = new ArrayList<>();
+        if(json!=null){
+            try {
+                JSONArray jArray = new JSONArray(json);
+                for(int i=0; i<jArray.length(); i++){
+                    String data = jArray.optString(i);
+                    valueList.add(data);
+                }
+            } catch (JSONException e){
+                e.getMessage();
+            }
+        }
+        return valueList;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -126,23 +148,36 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
             List<Address> list = null;
 
             for(int i = 0; i<jarr.length(); i++){
+                final ArrayList<String> foodKeyList=new ArrayList<>();
+                final ArrayList<String> foodValueList = new ArrayList<>();
+
                 json1=jarr.getJSONObject(i);
                 String name = json1.getString("UPSO_NM");
                 String addres_rd = json1.getString("SITE_ADDR_RD");
                 String food = json1.getString("MAIN_EDF");
                 JSONObject foodObject = new JSONObject(food);
                 Iterator iterator = foodObject.keys();
+
                 while(iterator.hasNext()){
                     String b = iterator.next().toString();
                     Log.d("food",b);
                     foodKeyList.add(b);
                 }
+                for( int j =0;j<foodKeyList.size();j++){
+                    foodValueList.add(foodObject.getString(foodKeyList.get(j)));
+                    Log.d("foodList",foodValueList.get(j));
+                }
+
+
+
+
                 list = geocoder.getFromLocationName(addres_rd,10);
 
                 double latitude = list.get(0).getLatitude();
                 double longitude = list.get(0).getLongitude();
 
                 storeInfos.add(i,new StoreInfo(name,addres_rd,latitude,longitude));
+                foodInfos.add(i, new FoodInfo(foodKeyList,foodValueList));
 
 
             }
@@ -165,28 +200,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     @UiThread
     @Override
     public void onMapReady(@NonNull NaverMap naverMap) {
-//        for (int j = 0; j < storeInfos.size(); j++) {
-//            info.add(new InfoWindow());
-//            info.get(j).setAdapter(new InfoWindow.DefaultTextAdapter(context) {
-//                @NonNull
-//                @Override
-//                public CharSequence getText(@NonNull InfoWindow infoWindow) {
-//                    int k = 0;
-//                    return storeInfos.get(k++).getName();
-//                }
-//            });
-//        }
-
-//        final InfoWindow infoWindow = new InfoWindow();
-//        infoWindow.setAdapter(new InfoWindow.DefaultTextAdapter(context) {
-//            @NonNull
-//            @Override
-//            public CharSequence getText(@NonNull InfoWindow infoWindow) {
-//                return (CharSequence)infoWindow.getMarker().getTag();
-//            }
-//        });
-//
-//        final int k=0;
 
         for (int i = 0; i < storeInfos.size(); i++) {
 
@@ -196,6 +209,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
             markers.get(i).setIcon(MarkerIcons.BLACK);
             markers.get(i).setTag(storeInfos.get(i).getName());
             final String storeName = storeInfos.get(i).getName();
+            final ArrayList<String> foodName = foodInfos.get(i).getFoodName();
 
             markers.get(i).setOnClickListener(new Overlay.OnClickListener() {
                 @Override
@@ -203,12 +217,15 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                     final AlertDialog.Builder alert = new AlertDialog.Builder(MainActivity.this);
                     final ArrayAdapter<String> adapter = new ArrayAdapter<String>(MainActivity.this, android.R.layout.select_dialog_item);
 //                    String foodName = null;
-                    for(int h =0; h<foodKeyList.size();h++){
-                        adapter.add(foodKeyList.get(h));
+                    for(int h =0; h<foodName.size();h++){
+//                        if(check(getStringArrayList("users_allery_list"))==true) {
+//                            adapter.add(foodKeyList.get(h) + "(X)");
+//                        } else{
+                            adapter.add(foodName.get(h));
+//                        }
                     }
                     alert.setTitle(storeName);
 //                    alert.setMessage();
-
                     alert.setAdapter(adapter, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
@@ -233,26 +250,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         }
 
     }
-//    public void showDialog(){
-//        final AlertDialog.Builder alert = new AlertDialog.Builder(MainActivity.this);
-//
-//        alert.setTitle("가게이름");
-//        alert.setMessage("메뉴정보");
-//        alert.setPositiveButton("확인", new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialog, int which) {
-//                Toast.makeText(MainActivity.this,"메뉴를 고르세요",Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//        alert.setNegativeButton("이동안함", new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialog, int which) {
-//
-//                Toast.makeText(MainActivity.this,"메뉴를 고르세요",Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//        alert.show();
-//    }
+
 
 
     public void onRequestPermissionResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -303,11 +301,14 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
-//    public String foodName(){
-//        for(int i =0; i<foodKeyList.size();i++) {
-//           return foodKeyList.get(i)+" ";
+//    public boolean check(ArrayList<String> arrayList){
+//        for(int j =0; j<getStringArrayList("users_allery_list").size();j++) {
+//            for (int i = 0; i < foodValueList.size(); i++) {
+//                if(foodValueList.get(i)==getStringArrayList("users_allery_list").get(j))
+//                    return true;
+//            }
 //        }
-//        return null;
+//        return false;
 //    }
 
 }
