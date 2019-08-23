@@ -40,6 +40,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.InputStream;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -163,13 +164,16 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                     Log.d("food",b);
                     foodKeyList.add(b);
                 }
-                for( int j =0;j<foodKeyList.size();j++){
+
+                for( int j =0;j<1;j++){
                     foodValueList.add(foodObject.getString(foodKeyList.get(j)));
                     Log.d("foodList",foodValueList.get(j));
                 }
 
-
-
+                for (int k = 0; k < foodValueList.size(); k++) {
+                    if (check(foodValueList, k))
+                        foodKeyList.set(0, "알러지 있는 음식");
+                }
 
                 list = geocoder.getFromLocationName(addres_rd,10);
 
@@ -301,14 +305,14 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
-//    public boolean check(ArrayList<String> arrayList){
-//        for(int j =0; j<getStringArrayList("users_allery_list").size();j++) {
-//            for (int i = 0; i < foodValueList.size(); i++) {
-//                if(foodValueList.get(i)==getStringArrayList("users_allery_list").get(j))
-//                    return true;
-//            }
-//        }
-//        return false;
-//    }
+    public boolean check(ArrayList<String> foodValueList, int key){
+
+            for (int i = 0; i < getStringArrayList("usersAllergyList").size(); i++) {
+                if (foodValueList.get(key).contains(getStringArrayList("usersAllergyList").get(i)))
+                    return false;
+            }
+
+        return true;
+    }
 
 }
