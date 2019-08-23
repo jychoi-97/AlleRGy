@@ -1,6 +1,7 @@
 
 package com.example.allergy;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
@@ -19,7 +20,6 @@ import org.json.JSONArray;
 import java.util.ArrayList;
 
 public class MeatStorageActivity extends AppCompatActivity {
-
 
 
     boolean saveLoginData[];
@@ -411,10 +411,11 @@ public class MeatStorageActivity extends AppCompatActivity {
         }
         if (!values.isEmpty()) {
             editor.putString(key, a.toString());
+            Toast.makeText(this, "알러지가 등록되었습니다.", Toast.LENGTH_SHORT).show();
         } else {
             editor.putString(key, null);
+            Toast.makeText(this, "알러지가 존재하지 않습니다.", Toast.LENGTH_SHORT).show();
         }
-        Toast.makeText(this, "알러지가 등록되었습니다.", Toast.LENGTH_SHORT).show();
         editor.commit();
         finish();
     }
