@@ -172,7 +172,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 
                 for (int k = 0; k < foodValueList.size(); k++) {
                     if (check(foodValueList, k))
-                        foodKeyList.set(0, "알러지 있는 음식");
+                        foodKeyList.set(k, foodKeyList.get(k) + "(x-조심하세요!)");
                 }
 
                 list = geocoder.getFromLocationName(addres_rd,10);
@@ -309,10 +309,10 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 
             for (int i = 0; i < getStringArrayList("usersAllergyList").size(); i++) {
                 if (foodValueList.get(key).contains(getStringArrayList("usersAllergyList").get(i)))
-                    return false;
+                    return true;
             }
 
-        return true;
+        return false;
     }
 
 }
